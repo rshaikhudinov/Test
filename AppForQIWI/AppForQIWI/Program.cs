@@ -26,9 +26,17 @@ namespace AppForQIWI
                 
                 string inputText = Console.ReadLine();
                 string[] words = inputText.Trim().Split(new char[] { ' ' });
-                int outputAmount = int.Parse(words[0]);
+                int outputAmount;
+                if (!int.TryParse(words[0], out outputAmount))
+                {
+                    throw new Exception($"{inputText} - неверно указана строка аргументов");
+                }
                 string numbers = inputText.Trim().Substring(words[0].Length).Trim();
                 words = numbers.Split(new char[] { ' ' });
+                if (string.IsNullOrEmpty(numbers))
+                {
+                    throw new Exception($"{inputText} - неверно указана строка аргументов");
+                }
                 Console.WriteLine("Полная очередь:");
                 foreach (string number in words)
                 {
